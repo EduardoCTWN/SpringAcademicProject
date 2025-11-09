@@ -1,0 +1,41 @@
+# Ignorar arquivos do Maven/Build
+target/
+build/
+.mvn/wrapper/maven-wrapper.jar
+
+# Exceções
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Arquivos de Configuração Sensíveis ###
+**/src/main/resources/application.properties
+
+# Ignorar outros arquivos
+HELP.md
