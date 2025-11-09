@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>Edit the restaurant</h1>
+    <form th:action="@{/{id}/save-restaurant-edit(id=${restaurant.id})}" th:object="${restaurant}" method="post">
+      <label for="nome">New name:</label>
+      <input type="text" id="name" name="name" value=""/>
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+      <input class="save-button" type="submit" value="save"/>
+    </form>
+  <br>
+    <a class="return-button" href="/restaurants">Return</a>
+  </body>
+</html>

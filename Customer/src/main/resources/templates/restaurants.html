@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>RESTAURANTS</h1>   
+
+    <div th:if="${restaurants.isEmpty()}">
+      <p>There is no restaurants.</p>
+    </div>
+
+    <table th:unless="${restaurants.isEmpty()}">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="restaurant : ${restaurants}">
+          <td>
+            <span th:text="${restaurant.name}"></span>
+          </td>
+          <td>
+            <p>
+              <a class="table-button" th:href="@{/{id}/menu-itens(id=${restaurant.id})}">Menu</a> |
+              <a class="table-button" th:href="@{/{id}/orders(id=${restaurant.id})}"> make an Order</a>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+  </body>
+</html>

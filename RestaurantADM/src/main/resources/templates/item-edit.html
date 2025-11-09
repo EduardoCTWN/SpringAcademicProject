@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>Edit the item</h1>
+    <form th:action="@{/itens/{id}/save-item-edit(id=${menuItem.id})}" th:object="${menuItem}" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" th:field="*{name}"/>
+      <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+      <label for="description">Description:</label>
+      <input type="text" id="description" th:field="*{description}"/>
+      <label for="nome">Price:</label>
+      <input type="number" id="price" th:field="*{price}"/>
+      <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+      <input class="save-button" type="submit" value="edit"/>
+    </form>
+  <br>
+    <a class="return-button" th:href="@{/{id}/menu-itens(id=${restaurant.id})}">Return</a>
+  </body>
+</html>

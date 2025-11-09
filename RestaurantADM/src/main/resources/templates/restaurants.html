@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>RESTAURANTS ADM</h1>   
+    
+    <div th:if="${restaurants.isEmpty()}">
+      <p>There is no restaurants.</p>
+    </div>
+
+    <table th:unless="${restaurants.isEmpty()}">
+      <thead>
+        <tr>
+          <th class="table-border">ID</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="restaurant : ${restaurants}">
+          <td th:text="${restaurant.id}" class="table-border"></td>
+  
+          <td class="restaurant-name">
+            <span th:text="${restaurant.name}"></span>
+
+          </td>
+          <td>
+            <a class="table-button" th:href="@{/{id}/menu-itens(id=${restaurant.id})}">Menu</a>
+          </td>
+          <td>
+            <p>
+              <a  class="table-button" th:href="@{/{id}/restaurant-edit(id=${restaurant.id})}">Edit</a> | <a class="table-button" th:href="@{/{id}/remove-restaurant(id=${restaurant.id})}">Remove</a>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="button-container">
+      <a class="anmbtn anmbtn-4" href="/new-restaurant">New Restaurant</a>
+    </div>
+  </body>
+</html>

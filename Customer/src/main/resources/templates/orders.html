@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>Make an order: <span th:text="${restaurant.name}">Restaurant</span></h1>
+    <br/><br/> 
+
+    <div th:if="${restaurant.menuItens.isEmpty()}">
+      <p>The Menu is empty.</p>
+    </div>
+
+    <table th:unless="${restaurant.menuItens.isEmpty()}">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>price</th>
+          <th>Add</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item : ${restaurant.menuItens}">
+          <td th:text="${item.name}"></td>
+          <td th:text="${item.description}"></td>
+          <td th:text="'R$ ' + ${#numbers.formatDecimal(item.price, 1, 2)}"></td>
+          <td>
+            <form th:action="@{/cart/add}" method="post" style="margin: 0;">
+                
+                <input type="hidden" name="itemId" th:value="${item.id}" />
+                
+                <input type="hidden" name="restaurantId" th:value="${restaurant.id}" />
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" value="1" min="1" style="width: 50px;" />
+                
+                <button class="save-button" type="submit">Add</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <p>
+      <a class="return-button" href="/restaurants">Voltar</a> | <a class="return-button" href="/cart">Ver Carrinho</a>
+    </p>
+  </body>
+</html>

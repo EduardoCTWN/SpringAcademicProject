@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>Menu Items</h1>  
+
+    <div th:if="${restaurant.menuItens.isEmpty()}">
+      <p>The Menu is empty.</p>
+    </div>
+
+    <table th:unless="${restaurant.menuItens.isEmpty()}">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item : ${restaurant.menuItens}">
+          <td class="padding-itens" th:text="${item.name}"></td>
+          <td class="padding-itens" th:text="${item.description}"></td>
+          <td class="padding-itens" th:text="'R$ ' + ${#numbers.formatDecimal(item.price, 1, 2)}"></td>
+          <td class="padding-itens">
+            <a class="table-button" th:href="@{/itens/{id}/item-edit(id=${item.id})}">Edit</a> |
+            <a class="table-button" th:href="@{/itens/{id}/remove-item(id=${item.id})}">Remove</a> 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="button-container">
+      <a class="anmbtn anmbtn-4" th:href="@{/{id}/new-item(id=${restaurant.id})}">New Item</a> 
+    </div> 
+    <br>
+    <a class="return-button" href="/restaurants">Return</a>
+  </body>
+</html>

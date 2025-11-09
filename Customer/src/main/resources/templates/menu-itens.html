@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <link rel="stylesheet" href="/Styles.css">
+  </head>
+  <body>
+    <h1>Menu itens</h1> 
+    
+    <div th:if="${restaurant.menuItens.isEmpty()}">
+      <p>The Menu is empty.</p>
+    </div>
+
+    <table th:unless="${restaurant.menuItens.isEmpty()}">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item : ${restaurant.menuItens}">
+          <td th:text="${item.name}"></td>
+          <td th:text="${item.description}"></td>
+          <td th:text="'R$ ' + ${#numbers.formatDecimal(item.price, 1, 2)}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <a class="return-button" href="/restaurants">Voltar</a>
+  </body>
+</html>

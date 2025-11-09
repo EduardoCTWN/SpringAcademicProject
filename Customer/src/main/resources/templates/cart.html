@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="/Styles.css">
+    </head>
+    <body>
+        <h1>My Cart</h1>
+
+        <div th:if="${cart.itens.isEmpty()}">
+            <p>The Cart is empty.</p>
+        </div>
+
+        <table th:unless="${cart.itens.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Restaurant</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
+                    <th>Subtotal</th>
+                    <th>Remove</th> </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${cart.itens}">
+                    <td class="padding-itens" th:text="${item.name}"></td>
+                    <td class="padding-itens" th:text="${item.restaurantName}"></td>
+                    <td class="padding-itens" th:text="'R$ ' + ${#numbers.formatDecimal(item.unitPrice, 1, 2)}"></td>
+                    <td class="padding-itens" th:text="${item.amount}"></td>
+                    <td class="padding-itens" th:text="'R$ ' + ${#numbers.formatDecimal(item.getTotalPrice(), 1, 2)}"></td>
+                    
+                    <td class="padding-itens">
+                        <a class="table-button" th:href="@{/cart/remove/{itemId}(itemId=${item.itemId})}">Remove</a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right;"><strong>Total:</strong></td>
+                    <td th:text="'R$ ' + ${#numbers.formatDecimal(cart.getTotalPrice(), 1, 2)}"></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <br/>
+        <a class="return-button" href="/restaurants">Continue buying</a>
+    </body>
+</html>
